@@ -53,6 +53,8 @@ curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations"\
         }'
 ```
 
+This example queries elevation values from the [Copernicus DEM](Copernicus DEM is a Digital Surface Model).
+
 ## Maintainers
 
 [@tomasholderness](https://github.com/tomasholderness)
