@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+.python
 build/
 develop-eggs/
 dist/
@@ -127,3 +128,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# VSCore
+.vscode/
+
+# Maps
+.maps
