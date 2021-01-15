@@ -12,6 +12,7 @@ This repository contains an example AWS Lambda Docker image which uses Rasterio 
 - [Install](#install)
 - [Usage](#usage)
 - [API](#api)
+- [Deploy](#deploy)
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
@@ -54,6 +55,69 @@ curl -XPOST "http://localhost:9000/2015-03-31/functions/function/invocations"\
 ```
 
 This example queries elevation values from the [Copernicus DEM](https://registry.opendata.aws/copernicus-dem/).
+
+## API
+
+### main
+
+Returns pixels values within specified area.
+
+Requires the following parameters:
+
+- raster: S3 address of the COG to query
+- geom: JSON/Fiona polygon geometry object
+
+Example query:
+
+```json
+{
+  "raster": "s3://copernicus-dem-30m/Copernicus_DSM_COG_10_N55_00_W006_00_DEM/Copernicus_DSM_COG_10_N55_00_W006_00_DEM.tif",
+    "geom": [
+    {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -5.2857375145,
+            55.7018595345
+          ],
+          [
+            -5.2792572975,
+            55.7018595345
+          ],
+          [
+            -5.2792572975,
+            55.7052207941
+          ],
+          [
+            -5.2857375145,
+            55.7052207941
+          ],
+          [
+            -5.2857375145,
+            55.7018595345
+          ]
+        ]
+      ]
+    }
+  ]
+}
+
+```
+
+Example response:
+
+```json
+"[[[0.0, 0.0, 0.0, 0.4298372268676758, 3.1277780532836914, 3.167654514312744, 3.940603017807007, 8.856860160827637, 14.149166107177734, 19.369218826293945, 21.710126876831055, 28.996673583984375, 34.88554763793945, 41.25983428955078, 48.78239822387695, 56.83858108520508, 65.9479751586914], ...]]"
+```
+
+## Deploy
+
+1. Build Docker image locally
+2. Push to Docker repository (AWS ECR Repository)
+3. Create Lambda using container image
+
+See this tutorial for more details: https://aws.amazon.com/blogs/aws/new-for-aws-lambda-container-image-support/
 
 ## Maintainers
 
